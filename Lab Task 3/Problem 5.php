@@ -13,3 +13,5 @@ $imageHeight="80px";
 University - 
 <span style="background-color:green;color:red"> Bangladesh</h2>
 </span></td>
+</tr>
+</table>
