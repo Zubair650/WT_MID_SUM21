@@ -90,15 +90,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		$err_password = "Password required";
 	}
 
-	else if((strlen($_POST["password"])< 8) && (strpos($_POST["password"],'#') == false) && (strpos($_POST["password"],'?') == false) && (ctype_upper($_POST["password"]) == false) && (ctype_lower($_POST["password"]) == false))
+	else if((strlen($_POST["password"])< 8))
 	{
 		$hasError = true;
-		$err_password = "Password Invalid";
+		$err_password = "Password requires minimum 8 characters";
 	}
+	if((strlen($_POST["password"])>= 8))
+	{
+	
+	$passwordvariable = $_POST["password"];
+	$uppercase = preg_match('@[A-Z]@',$passwordvariable);
+	$lowercase = preg_match('@[a-z]@',$passwordvariable);
+	if(!$uppercase)
+	{
+	$hasError = true;
+	$err_password = "Password requires uppercase letters";
+	}
+	else if(!$lowercase)
+	{
+	$hasError = true;
+	$err_password = "Password requires lowercase letters";
+	}
+	if(strpos($_POST["password"],'#') == false && (strpos($_POST["password"],'?') == false))
+	{
+		$hasError = true;
+		$err_password = "Password requires minimum 1 '#' and '?'";
+	}
+	
 	
 	else
 	{
 		$password = $_POST["password"];
+	}
 	}
 	
 	if(empty($_POST["confirm_password"]))
@@ -106,15 +129,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		$hasError = true;
 		$err_confirm_password = "Password required";
 	}
-	else if(strlen($_POST["confirm_password"])< 8 && strpos($_POST["confirm_password"],'#') == false && strpos($_POST["confirm_password"],'?') == false && ctype_upper($_POST["confirm_password"]) == false && ctype_lower($_POST["confirm_password"]) == false && Htmlspecialchars($_POST["confirm_password"] == false))
+	elseif((strlen($_POST["confirm_password"])< 8))
 	{
 		$hasError = true;
-		$err_confirm_password = "Password Invalid";
+		$err_confirm_password = "Password requires minimum 8 characters";
 	}
+	if((strlen($_POST["confirm_password"])>= 8))
+	{
+	
+	
+	
+	$passwordvariable = $_POST["confirm_password"];
+	$uppercase = preg_match('@[A-Z]@',$passwordvariable);
+	$lowercase = preg_match('@[a-z]@',$passwordvariable);
+	if(!$uppercase)
+	{
+	$hasError = true;
+	$err_confirm_password = "Password requires uppercase letters";
+	}
+	else if(!$lowercase)
+	{
+	$hasError = true;
+	$err_confirm_password = "Password requires lowercase letters";
+	}
+	if(strpos($_POST["confirm_password"],'#') == false && (strpos($_POST["confirm_password"],'?') == false))
+	{
+		$hasError = true;
+		$err_confirm_password = "Password requires minimum 1 '#' and '?'";
+	}
+	
 	else
 	{
 		$confirm_password = $_POST["confirm_password"];
 	}
+	}
+	
 	
 	if(empty($_POST["email"]))
 	{
